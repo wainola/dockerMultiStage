@@ -11,6 +11,7 @@ services:
       target: build-stage
     volumes:
       - ./client:/usr/client
+      - ~/node_modules/:/usr/client/node_modules
     ports:
       - 5100:3000
     command: npm run start
@@ -22,6 +23,7 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ./server:/usr/server
+      - ~/node_modules/:usr/server/node_modules
     ports:
       - 5000:5000
     command: npm run dev
