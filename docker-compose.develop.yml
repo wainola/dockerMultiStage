@@ -1,0 +1,27 @@
+version: "3.4"
+services:
+  proxy:
+    image: traefik-v1.7.9-alpine
+
+  client:
+    image: client
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+      target: build-stage
+    volumes:
+      - ./client:/usr/client
+    ports:
+      - 5100:3000
+    command: npm run start
+
+  server:
+    image: server
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./server:/usr/server
+    ports:
+      - 5000:5000
+    command: npm run dev
